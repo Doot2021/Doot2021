@@ -1,0 +1,14 @@
+import ducoapi
+import telebot
+from telebot import types
+bot = telebot.TeleBot('2124196141:AAF-JOszgtuk7l1Y2U7NZi2feJOOfaAizCA')
+@bot.message_handler(commands=['start'])
+def start_message(message):
+        bot.send_message(message.chat.id, "Привет, я расскажу тебе о курсе криптовалюты Duino-Coin(DUCO)")
+        bot.send_message(message.chat.id, "Выбери то что тебе нужно", reply_markup=markup)
+@bot.message_handler(content_types=['text'])
+def message_reply(message):
+     if message.text=="/Курс DUCO":
+        markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
+        bot.send_message(message.chat.id, ducoapi.get_duco_price(), reply_markup=markup)
+bot.infinity_polling()
